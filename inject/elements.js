@@ -936,7 +936,7 @@ Use Ctrl + Click or Command + Click to remove local language training data`,
                     const ocr_text = this.shadowRoot.getElementById('result').innerText;
                     const API_KEY = this.shadowRoot.getElementById('key').value;
                     const prompt = this.shadowRoot.getElementById('prompt').value;
-                    const question = `Prompt-"${prompt}". Context-"${ocr_text}"`;
+                    const question = `Prompt-"${prompt}". Context-"${ocr_text}". Please answer concisely with a single word or letter.`;
                     
                     // show spinner and hide response
                     this.shadowRoot.getElementById('prompt-response-spinner').style.display = 'block';
@@ -954,7 +954,7 @@ Use Ctrl + Click or Command + Click to remove local language training data`,
                         messages: [
                           { role: 'user', content: question }
                         ],
-                          max_tokens: 100 
+                          max_tokens: 20
                       })
                     })
                     .then(response => response.json())

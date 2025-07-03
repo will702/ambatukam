@@ -8,7 +8,7 @@ A **Chrome extension** that takes custom screenshots, **extracts text**, and all
 
 1. **Custom Screenshots**: Capture screenshots from Chrome.
 2. **Text Extraction**: Extract text from screenshots using Tesseract OCR.
-3. **Ask Questions**: Use Google Gemini API to ask questions based on extracted text.
+3. **Ask Questions**: Use the OpenAI GPT API to ask questions based on extracted text.
 4. **User Preferences**: Configure language and accuracy settings for OCR.
 5. **Interactive OCR Results**: View and interact with extracted text by copying it, saving it, or saving the screenshot.
 
@@ -28,19 +28,19 @@ A **Chrome extension** that takes custom screenshots, **extracts text**, and all
 ![Screenshot (38)](https://github.com/user-attachments/assets/50ce95f2-0f29-4594-8326-f98ac3c07a8b)
 
 </br></br>
-`Step 3:` Fill *Google Gemini* API key and ask related *question*
+`Step 3:` Fill *OpenAI GPT* API key and ask related *question*
 <br>
-Prerequisite: `Google Gemini API`
+Prerequisite: `OpenAI GPT API`
 </br>
 
 ![Screenshot (39)](https://github.com/user-attachments/assets/cf75db26-a63c-40d5-8dd0-3976b80076de)
 
 </br></br>
-## Steps to get Gemini API key
- - Sign up at `https://ai.google.dev/aistudio`
- 
-   
- - Click on `Get API key`
+## Steps to get OpenAI API key
+ - Sign up at `https://platform.openai.com/signup`
+
+
+ - Visit `https://platform.openai.com/account/api-keys` and create a new key
 <img src ="https://github.com/gitgoap/AI-Snipping-Tool/assets/117789470/9ae60e18-1966-4550-9ebc-59c468dec70c" height= 250 >
 
 
@@ -233,7 +233,7 @@ https://github.com/user-attachments/assets/a8769d70-4d1e-4b93-a2f5-7692ab313b3f
 # Future Scope / Features
 
 - [ ] **YouTube Video Screenshot:** Capture text in the current YouTube video frame with just one click of a popup button.
-- [ ] **Answers questions just with screenshots:** This feature is possible by utilizing the multimodal feature of Google Gemini.
+- [ ] **Answers questions just with screenshots:** This feature will be possible by utilizing the multimodal capabilities of OpenAI GPT models.
 
 
   ![image](https://github.com/gitgoap/HackFest-24-IIT-Dhanbad/assets/117789470/1592f070-2e07-436b-b268-dc25be5e8e53)

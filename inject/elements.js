@@ -461,7 +461,7 @@ Use Ctrl + Click or Command + Click to remove local language training data`,
         <input type="text" placeholder="Ask a question" id="prompt">
         </br>
         <label for="api-key-section">API Key
-            <a href="https://aistudio.google.com/app/apikey" title="Get API Key" style="text-decoration: none;">
+            <a href="https://platform.openai.com/account/api-keys" title="Get API Key" style="text-decoration: none;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                     <polyline points="15 3 21 3 21 9"></polyline>
@@ -471,7 +471,7 @@ Use Ctrl + Click or Command + Click to remove local language training data`,
         </label>
 
         <div id="api-key-section">
-            <input type="text" placeholder="Enter your Gemini API key" id="key">
+            <input type="text" placeholder="Enter your OpenAI API key" id="key">
             <button id="save-key">Save</button>
         </div>
     </div>
@@ -805,8 +805,8 @@ Use Ctrl + Click or Command + Click to remove local language training data`,
                   }.bind(this));
 
                 // Enter saved API Key in the API Key input field.
-                chrome.storage.local.get('gemini-api-key', function(result) {
-                    const API_KEY = result['gemini-api-key'];
+                chrome.storage.local.get('openai-api-key', function(result) {
+                    const API_KEY = result['openai-api-key'];
                     if (API_KEY !== undefined) { 
                         // Check if API_KEY is not undefined
                         const apiKeyField = this.shadowRoot.querySelector('#key');
@@ -943,20 +943,22 @@ Use Ctrl + Click or Command + Click to remove local language training data`,
                     this.shadowRoot.getElementById('summary-area').style.display = 'none';
                     this.shadowRoot.getElementById('answer-heading').style.display = 'none';
                   
-                    fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
+                    fetch('https://api.openai.com/v1/chat/completions', {
                       method: 'POST',
                       headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${API_KEY}`
                       },
                       body: JSON.stringify({
-                        "contents": [
-                          { "parts": [{ "text": question }] }
+                        model: 'gpt-3.5-turbo',
+                        messages: [
+                          { role: 'user', content: question }
                         ]
                       })
                     })
                     .then(response => response.json())
                     .then(data => {
-                      const generatedSummary = data.candidates[0].content.parts[0].text;
+                      const generatedSummary = data.choices[0].message.content;
                       const summaryArea = this.shadowRoot.getElementById('summary-area');
                       summaryArea.textContent = generatedSummary;
                       
@@ -975,7 +977,7 @@ Use Ctrl + Click or Command + Click to remove local language training data`,
                 // Save API Key
                 this.shadowRoot.getElementById('save-key').onclick = e => {
                     var API_KEY = this.shadowRoot.getElementById('key').value;
-                    chrome.storage.local.set({ 'gemini-api-key': API_KEY }, function() {
+                    chrome.storage.local.set({ 'openai-api-key': API_KEY }, function() {
                     console.log(API_KEY);
                     });
                 };
